@@ -1,2 +1,1 @@
-# mugshot-sharing-system
-Blockchain-based Mugshot Sharing System
+# Blockchain-based Mugshot Sharing System
