@@ -14,10 +14,7 @@ const path = require('path');
 let registerUser = async(account) => {
     try {
         console.log("*****Register User SDK*****");
-        let name =  account["name"];
-        let organization = account["organization"];
-        let employeeID = account["employeeID"];
-        let username = account["username"];
+        let username = account["policedepartmentid"];
         /*console.log("Name: "  + name);
         console.log("Organization: " + organization);
         console.log("Employee ID: " + employeeID);

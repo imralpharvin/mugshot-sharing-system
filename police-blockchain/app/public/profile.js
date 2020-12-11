@@ -2,51 +2,30 @@
 $(document).ready(function () {
   console.log("*****HOME.JS*****");
 
-  loadAccount();
+  loadProfile();
 
-  document.getElementById('datamarketplacePage').onclick = function () {
-    console.log("***** Data Marketplace Page Clicked*****");
+  document.getElementById('policedepartmentsPage').onclick = function () {
+    console.log("***** Police Departments Page Clicked*****");
 
-    let usernameInfo = document.getElementById('usernameInfo');
+    let idInfo = document.getElementById('idInfo');
     let credentials = {};
-    credentials["username"] = usernameInfo.innerHTML;
+    credentials["idInfo"] = idInfo.innerHTML;
 
-    sendUsername(credentials);
-    window.location.href = '/datamarketplace';
+    sendIdInfo(credentials);
+    window.location.href = '/policedepartments';
   };
 
   document.getElementById('profilePage').onclick = function () {
     console.log("***** Profile Page Clicked*****");
 
-    let usernameInfo = document.getElementById('usernameInfo');
+    let idInfo = document.getElementById('idInfo');
     let credentials = {};
-    credentials["username"] = usernameInfo.innerHTML;
+    credentials["idInfo"] = idInfo.innerHTML;
 
-    sendUsername(credentials);
+    sendIdInfo(credentials);
     window.location.href = '/profile';
   };
 
-  document.getElementById('datahashesPage').onclick = function () {
-    console.log("***** DataHash Page Clicked*****");
-
-    let usernameInfo = document.getElementById('usernameInfo');
-    let credentials = {};
-    credentials["username"] = usernameInfo.innerHTML;
-
-    sendUsername(credentials);
-    window.location.href = '/datahash';
-  };
-
-  document.getElementById('transactionsPage').onclick = function () {
-    console.log("***** Transactions Page Clicked*****");
-
-    let usernameInfo = document.getElementById('usernameInfo');
-    let credentials = {};
-    credentials["username"] = usernameInfo.innerHTML;
-
-    sendUsername(credentials);
-    window.location.href = '/transaction';
-  };
   //Log Out
   document.getElementById('logOut').onclick = function () {
     console.log("*****Log Out Button Clicked*****");
@@ -54,21 +33,21 @@ $(document).ready(function () {
   };
 
 
-  function sendUsername(credentials){
+  function sendIdInfo(credentials){
     $.ajax({
       type: "POST",
-      url: "./sendUsername",
+      url: "./sendIdInfo",
       data: JSON.stringify(credentials),
       dataType: 'text',
       contentType: "application/json",
       async: false,
       success: function (data) {
-        console.log("*****SUCCESS: Send Username POST request*****");
+        console.log("*****SUCCESS: Send Police POST request*****");
         console.log(JSON.stringify(data));
 
       },
       error: function (error) {
-        console.log("*****FAILURE: Send Username POST request*****");
+        console.log("*****FAILURE: Send Police POST request*****");
         //let logInError = document.getElementById('logInError');
         //logInError.innerHTML = 'Incorrect Log In. Please try again';
         console.log(error);
@@ -78,28 +57,24 @@ $(document).ready(function () {
   }
 
   //Load Account Detaisl
-  function loadAccount(){
+  function loadProfile(){
     $.ajax({
       type: 'GET',
       dataType: 'json',
-      url: '/loadAccount',
+      url: '/loadProfile',
       async: 'false',
       success: function (data) {
         console.log(data);
 
-        let account = data;
-        console.log(account);
-        let nameInfo = document.getElementById('nameInfo');
-        let usernameInfo = document.getElementById('usernameInfo');
-        let organizationInfo = document.getElementById('organizationInfo');
-        let employeeIDInfo = document.getElementById('employeeIDInfo');
-        let balanceInfo = document.getElementById('balanceInfo');
+        let department = data;
+        console.log(department);
+        let policedepartmentname = document.getElementById('nameInfo');
+        let policedepartmentid = document.getElementById('idInfo');
+        let policedepartmenthash = document.getElementById('hashInfo');
 
-        nameInfo.innerHTML = account["name"];
-        usernameInfo.innerHTML = account["username"];
-        organizationInfo.innerHTML = account["organization"];
-        employeeIDInfo.innerHTML = account["employeeID"];
-        balanceInfo.innerHTML = account["balance"];
+        policedepartmentname.innerHTML = department["name"];
+        policedepartmentid.innerHTML = department["departmentID"];
+        policedepartmenthash.innerHTML = department["hash"];
 
       },
       fail: function (error) {

@@ -1,0 +1,2 @@
+Installed chaincodes on peer:
+Package ID: policedepartment_1:e9d2a3efd9058f15341b6ecb3f270f2017cd9bb238e76d09ceaf3e053f2a8e9b, Label: policedepartment_1

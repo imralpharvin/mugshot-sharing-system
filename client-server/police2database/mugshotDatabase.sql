@@ -13,6 +13,6 @@ CREATE TABLE mugshots(
 );
 
 --insert values
-INSERT INTO mugshots VALUES('hashstring','namestring');
+INSERT INTO mugshots VALUES('8743b52063cd84097a65d1633f5c74f5','Case Murder 23243535: John Smith, Age 35');
 
 GRANT ALL PRIVILEGES ON TABLE mugshots TO policeserver;

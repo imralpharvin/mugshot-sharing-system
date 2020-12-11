@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Data Marketplace</title>
+  <title>Mugshot Sharing System</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Data Marketplace">
-  <meta name="keywords" content="Data Marketplace">
+  <meta name="description" content="Mugshot Sharing System">
+  <meta name="keywords" content="Mugshot Sharing System">
   <meta name="author" content="Ralph Arvin De Castro">
   <!-- Load jquery, bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -29,8 +29,8 @@
   <br>
   <br>
   <center>
-    <h1>Data Marketplace</h1>
-    <form id="registerUser">
+    <h1>Mugshot Sharing System</h1>
+    <form id="registerPoliceDepartment">
 
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
       aria-expanded="false" aria-controls="collapseExample">
@@ -39,21 +39,13 @@
     </p>
     <div class="collapse" id="collapseExample">
       <div class="card card-body">
-        Name:<br>
-        <input type="text"  class="form-control"  id="addName" name="name" required><br>
-        Organization:<br>
-        <select name="Organization"  class="form-control"  id="addOrg" required>
-          <option value=""></option>
-          <option value="Apple Co.">Apple Co.</option>
-          <option value="Banana Ltd.">Banana Ltd.</option>
-          <option value="Cheesecake Inc.">Cheesecake Inc.</option>
-          <option value="Donut Corp.">Donut Corp.</option>
-        </select><br>
-        Employee ID:<br>
-        <input type="number"  class="form-control"  id="addID" name="employeeid" required><br>
+        Police Department Name:<br>
+        <input type="text"  class="form-control"  id="addName" name="policedepartmentname" required><br>
+        Police Department ID:<br>
+        <input type="number"  class="form-control"  id="addID" name="policedepartmentid" required><br>
         <br>
-        Enter Username:<br>
-        <input type="text"  class="form-control"  id="addUsername" name="username" required><br>
+        Police Department PK Hash:<br>
+        <input type="text"  class="form-control"  id="addHash" name="policedepartmenthash" required><br>
         Enter Password:<br>
         <input type="password"  class="form-control"  id="addPassword" name="pw" required><br>
         Confirm Password:<br>
@@ -78,7 +70,7 @@
   </p>
   <div class="collapse" id="collapseExample2">
     <div class="card card-body">
-      Username:<br>
+      Police Department Number:<br>
       <input type="text"  class="form-control"  id="getUsername" name="uid" required><br>
       Password:<br>
       <input type="password"  class="form-control"  id="getPassword" name="uid" required><br>

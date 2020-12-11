@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	sc "github.com/hyperledger/fabric-protos-go/peer"
@@ -32,19 +34,29 @@ func (s *PoliceDepartmentContract) Invoke(APIstub shim.ChaincodeStubInterface) s
 		return s.CreatePoliceDepartment(APIstub, args)
 	case "QueryPoliceDepartment":
 		return s.QueryPoliceDepartment(APIstub, args)
+	case "QueryPoliceDepartmentByID":
+		return s.QueryPoliceDepartmentByID(APIstub, args)
+	case "QueryAllPoliceDepartments":
+		return s.QueryAllPoliceDepartments(APIstub)
 	default:
 		return shim.Error("Invalid Smart Contract function name.")
 	}
 }
 
 func (s *PoliceDepartmentContract) CreatePoliceDepartment(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
   if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
+	}
+
+	departmentIDint, err := strconv.Atoi(args[1])
+	if err == nil {
+		fmt.Println(departmentIDint)
 	}
 	policedepartment := PoliceDepartment{
 		ObjectType: "policedepartment",
 		Name:  args[0],
-    DepartmentID: args[1],
+    DepartmentID: departmentIDint,
 		Hash:  args[2],
 
 	}
@@ -62,6 +74,33 @@ func (s *PoliceDepartmentContract) QueryPoliceDepartment(APIstub shim.ChaincodeS
 
 	policedepartmentAsBytes, _ := APIstub.GetState(args[0])
 	return shim.Success(policedepartmentAsBytes)
+}
+
+func (s *PoliceDepartmentContract) QueryPoliceDepartmentByID(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+	if len(args) < 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+
+	departmentID := strings.ToLower(args[0])
+
+	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"policedepartment\",\"departmentID\":%s}}", departmentID)
+
+	queryResults, err := getQueryResultForQueryString(APIstub, queryString)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	return shim.Success(queryResults)
+}
+
+func (s *PoliceDepartmentContract) QueryAllPoliceDepartments(APIstub shim.ChaincodeStubInterface) sc.Response {
+
+	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"policedepartment\"}}")
+
+	queryResults, err := getQueryResultForQueryString(APIstub, queryString)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	return shim.Success(queryResults)
 }
 
 func main() {

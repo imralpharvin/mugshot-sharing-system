@@ -14,48 +14,45 @@ $(document).ready(function () {
 
 password.onchange = validatePassword;
 confirmPassword.onkeyup = validatePassword;
-  //Register User Function
-  $('#registerUser').submit(function (event) {
+  //Register Police Department Function
+  $('#registerPoliceDepartment').submit(function (event) {
     event.preventDefault();
 
-    console.log("*****Register User Event Clicked*****");
+    console.log("*****Register Police Department Event Clicked*****");
 
-    let name = document.getElementById('addName').value;
-    let organization = document.getElementById('addOrg').value;
-    let employeeID = document.getElementById('addID').value;
-    let username = document.getElementById('addUsername').value;
+    let policedepartmentname = document.getElementById('addName').value;
+    let policedepartmentid = document.getElementById('addID').value;
+    let policedepartmenthash = document.getElementById('addHash').value;
     let password = document.getElementById('addPassword').value;
 
-    console.log("*****User and Account Details*****")
-    console.log("Name: " + name);
-    console.log("Organization: " + organization);
-    console.log("Employee ID: " + employeeID);
-    console.log("Username: " + username);
+    console.log("*****Police Department Details*****")
+    console.log("Police Department Name: " + policedepartmentname);
+    console.log("Police Department ID: " + policedepartmentid);
+    console.log("Police Department Hash: " + policedepartmenthash);
 
-    let account = {};
-    account["name"] = name;
-    account["organization"] = organization;
-    account["employeeID"] = employeeID;
-    account["username"] = username;
-    account["password"] = password;
+    let department = {};
+    department["policedepartmentname"] = policedepartmentname;
+    department["policedepartmentid"] = policedepartmentid;
+    department["policedepartmenthash"] = policedepartmenthash;
+    department["password"] = password;
 
     $.ajax(
       {
         type: "POST",
-        url: "./registerUser",
-        data: JSON.stringify(account),
+        url: "./registerPoliceDepartment",
+        data: JSON.stringify(department),
         dataType: 'text',
         contentType: "application/json",
         async: false,
         success: function (data, no, yes) {
-          console.log("*****SUCCESS: Register User POST request*****");
+          console.log("*****SUCCESS: Register Police Department POST request*****");
           let registrationMessage = document.getElementById("registrationMessage");
           registrationMessage.innerHTML = 'User succesfully registered.';
 
 
         },
         fail: function (error) {
-          console.log("*****FAILURE: Register User POST request*****");
+          console.log("*****FAILURE: Register Police Department POST request*****");
           console.log(error);
         }
       });
@@ -82,13 +79,13 @@ confirmPassword.onkeyup = validatePassword;
       contentType: "application/json",
       async: false,
       success: function (data) {
-        console.log("*****SUCCESS: Log In User GET request*****");
+        console.log("*****SUCCESS: Log In Police Department GET request*****");
         console.log(JSON.stringify(data));
         window.location.href = '/profile';
 
       },
       error: function (error) {
-        console.log("*****FAILURE: Log In User GET request*****");
+        console.log("*****FAILURE: Log In Police Department GET request*****");
         let logInError = document.getElementById('logInError');
         logInError.innerHTML = 'Incorrect Log In. Please try again';
         console.log(error);

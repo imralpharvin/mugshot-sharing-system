@@ -5,18 +5,6 @@ from socket import AF_INET, SOCK_STREAM, SO_REUSEADDR, SOL_SOCKET, SHUT_RDWR
 import ssl
 import psycopg2
 
-database = psycopg2.connect("dbname='police_database' user='policeserver' host='localhost' password='police'")
-cur = database.cursor()
-cur.execute("SELECT * FROM mugshots")
-row = cur.fetchone()
-
-while row is not None:
-    print(row)
-    row = cur.fetchone()
-
-cur.close()
-
-
 listen_addr = '127.0.0.1'
 listen_port = 8082
 server_cert = 'server.crt'
@@ -48,6 +36,15 @@ while True:
             else:
                 # No more data from client. Show buffer and close connection.
                 print("Received:", buf)
+                database = psycopg2.connect("dbname='police_database' user='policeserver' host='localhost' password='police'")
+                cur = database.cursor()
+                cur.execute("SELECT * FROM mugshots WHERE hash = '8743b52063cd84097a65d1633f5c74f5'")
+                row = cur.fetchone()
+                while row is not None:
+                    print(row)
+                    row = cur.fetchone()
+
+                cur.close()
                 break
     finally:
         print("Closing connection")
