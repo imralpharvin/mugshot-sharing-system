@@ -42,8 +42,8 @@ while True:
                 row = cur.fetchone()
                 while row is not None:
                     print(row)
+                    #conn.send(row)
                     row = cur.fetchone()
-
                 cur.close()
                 break
     finally:

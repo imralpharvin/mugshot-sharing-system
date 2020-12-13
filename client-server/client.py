@@ -18,6 +18,6 @@ conn = context.wrap_socket(s, server_side=False, server_hostname=server_sni_host
 conn.connect((host_addr, host_port))
 print("SSL established. Peer: {}".format(conn.getpeercert()))
 print("Sending: 'search 8743b52063cd84097a65d1633f5c74f5'")
-conn.send(b"search 8743b52063cd84097a65d1633f5c74f5")
+conn.sendall(b"search 8743b52063cd84097a65d1633f5c74f5")
 print("Closing connection")
 conn.close()
